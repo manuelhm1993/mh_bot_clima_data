@@ -1,0 +1,26 @@
+# Datos secretos y claves de la app
+.env
+
+# Historial de control de versiones
+.git
+
+# No es necesario dentro del contenedor
+.gitignore
+
+# Configuración local
+docker-compose.yml
+
+# Configuración local de desarrollo
+docker-compose-dev.yml
+
+# Documentación del proyecto
+README.md
+
+# Se ocmpilan dentro del contenedor si hace falta
+node_modules/
+
+# Archivos locales y logs del sistema
+/storage/
+
+# Pruebas unitarias, si no corren en producción
+/tests/

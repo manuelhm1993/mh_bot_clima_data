@@ -1,0 +1,21 @@
+# Datos secretos y claves de la app
+.env
+
+# Llaves de cifrado
+/storage/*.key
+
+# Archivos de bitácora
+/storage/*.log
+
+# Dependencias de composer
+/vendor/
+
+# Caché del framework
+/bootstrap/cache/*.php
+
+# Caché de pruebas
+.phpunit.result.cache
+
+# Dependencias de node
+node_modules/
+npm-debug.log
