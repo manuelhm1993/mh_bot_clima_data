@@ -1,7 +1,12 @@
 FROM php:8.3-apache
 
-# Instalamos la extensión PDO para MySQL
-RUN docker-php-ext-install pdo pdo_mysql
+# Dependencias del sistema para compilar la extensión curl
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Extensiones de PHP
+RUN docker-php-ext-install pdo pdo_mysql curl
 
 # Habilitamos la reescritura de URLs de Apache
 RUN a2enmod rewrite

@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     volumes:
       - mh_bot_clima_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql   # ← nuevo
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASS}"]
       interval: 5s

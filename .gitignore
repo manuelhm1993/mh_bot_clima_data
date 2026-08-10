@@ -2,16 +2,16 @@
 .env
 
 # Llaves de cifrado
-/storage/*.key
+storage/*.key
 
 # Archivos de bitácora
-/storage/*.log
+storage/*.log
 
 # Dependencias de composer
-/vendor/
+vendor/
 
 # Caché del framework
-/bootstrap/cache/*.php
+bootstrap/cache/*.php
 
 # Caché de pruebas
 .phpunit.result.cache
