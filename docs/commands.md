@@ -10,4 +10,7 @@ docker compose -f docker-compose-dev.yml exec -T mh_clima_db sh -c 'exec mysql -
 
 4. Comprobar la consulta 2 del dia
 docker compose -f docker-compose-dev.yml exec mh_clima_web php bin/run-morning.php
+
+5. Apagar el contenedor
+docker compose -f docker-compose-dev.yml down
 ```
