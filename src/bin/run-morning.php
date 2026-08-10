@@ -7,9 +7,9 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 use App\Services\WeatherService;
 use App\Services\HydrationCalculator;
 use App\Services\TelegramNotifier;
+use App\Services\MailNotifier;
 
 use App\Repositories\RunLogRepository;
-
 use Dotenv\Dotenv;
 
 // A partir de aquí, common.php ya se cargó vía el autoloader "files",
@@ -65,6 +65,8 @@ Hervidas necesarias: {$result['boils_needed']}
 Log guardado con ID: {$logId}\n";
 
 // ------------------------------------------ Notificaciones
+//
+// ------------------------------------------ Telegram
 $telegram = new TelegramNotifier(
     getenv('TELEGRAM_BOT_TOKEN'),
     getenv('TELEGRAM_CHAT_ID')
@@ -83,3 +85,25 @@ $telegramSent = $telegram->send($mensaje);
 echo $telegramSent
     ? "Notificación Telegram enviada.\n"
     : "Notificación Telegram FALLÓ (revisar error_log).\n";
+
+// ------------------------------------------ Correo
+$mailer = new MailNotifier(
+    getenv('GMAIL_USER'),
+    getenv('GMAIL_APP_PASSWORD'),
+    array_filter(explode(',', getenv('GMAIL_TO'))),
+    array_filter(explode(',', getenv('GMAIL_CC') ?: ''))
+);
+
+$htmlBody = "<h2>🌡️ Bot Clima — {$today}</h2>"
+    . "<p>Temperatura máxima: <strong>{$temperature}°C</strong></p>"
+    . "<p>Litros por adulto: {$result['liters_per_adult']}L</p>"
+    . "<p>Litros bebé: {$result['liters_baby']}L</p>"
+    . "<p><strong>Total del día: {$result['total_liters']}L</strong></p>"
+    . "<p><strong>Hervidas necesarias: {$result['boils_needed']}</strong></p>"
+    . "<p>Ronda 1: ahora. Quedan " . ($result['boils_needed'] - 1) . " rondas más hoy.</p>";
+
+$mailSent = $mailer->send("Bot Clima {$today} — {$result['boils_needed']} hervidas", $htmlBody);
+
+echo $mailSent
+    ? "Notificación Gmail enviada.\n"
+    : "Notificación Gmail FALLÓ (revisar error_log).\n";
