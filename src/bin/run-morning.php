@@ -23,16 +23,16 @@ $pdoFactory = require "$base_dir/config/database.php";
 $pdo = $pdoFactory();
 
 $weather = new WeatherService(
-    (float) getenv('WEATHER_LAT'),
-    (float) getenv('WEATHER_LON'),
-    getenv('WEATHER_TIMEZONE')
+    (float) env('WEATHER_LAT'),
+    (float) env('WEATHER_LON'),
+    env('WEATHER_TIMEZONE')
 );
 
 $calculator = new HydrationCalculator();
 $repository = new RunLogRepository($pdo);
 
 $temperature = $weather->getTodayMaxTemperature();
-$adults      = (int) getenv('HOUSEHOLD_ADULTS');
+$adults      = (int) env('HOUSEHOLD_ADULTS');
 $result      = $calculator->calculate($temperature, $adults);
 
 $today = date('Y-m-d');
@@ -41,7 +41,7 @@ $now   = date('Y-m-d H:i:s');
 $logId = $repository->insertToday([
     'run_date'            => $today,
     'executed_at'         => $now,
-    'city'                => getenv('WEATHER_CITY') ?: 'Maracaibo',
+    'city'                => env('WEATHER_CITY') ?: 'Maracaibo',
     'temperature_celsius' => $temperature,
     'liters_per_adult'    => $result['liters_per_adult'],
     'liters_baby'         => $result['liters_baby'],
@@ -69,8 +69,8 @@ Log guardado con ID: {$logId}\n";
 //
 // ------------------------------------------ Telegram
 $telegram = new TelegramNotifier(
-    getenv('TELEGRAM_BOT_TOKEN'),
-    getenv('TELEGRAM_CHAT_ID')
+    env('TELEGRAM_BOT_TOKEN'),
+    env('TELEGRAM_CHAT_ID')
 );
 
 $mensaje = "🌡️ <b>Bot Clima — {$today}</b>\n\n"
@@ -89,10 +89,10 @@ echo $telegramSent
 
 // ------------------------------------------ Correo
 $mailer = new MailNotifier(
-    getenv('GMAIL_USER'),
-    getenv('GMAIL_APP_PASSWORD'),
-    array_filter(explode(',', getenv('GMAIL_TO'))),
-    array_filter(explode(',', getenv('GMAIL_CC') ?: ''))
+    env('GMAIL_USER'),
+    env('GMAIL_APP_PASSWORD'),
+    array_filter(explode(',', env('GMAIL_TO'))),
+    array_filter(explode(',', env('GMAIL_CC') ?: ''))
 );
 
 $htmlBody = "<h2>🌡️ Bot Clima — {$today}</h2>"

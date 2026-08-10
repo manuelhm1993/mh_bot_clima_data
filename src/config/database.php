@@ -1,10 +1,10 @@
 <?php
 
 return function (): PDO {
-    $host = getenv('DB_HOST');
-    $db   = getenv('DB_NAME');
-    $user = getenv('DB_USER');
-    $pass = getenv('DB_PASS');
+    $host = env('DB_HOST');
+    $db   = env('DB_NAME');
+    $user = env('DB_USER');
+    $pass = env('DB_PASS');
 
     $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 

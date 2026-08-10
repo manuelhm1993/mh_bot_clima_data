@@ -31,16 +31,16 @@ $mensaje = "⏰ <b>Recordatorio Bot Clima</b>\n\n"
     . "Total del día: {$log['total_liters']}L a {$log['temperature_celsius']}°C.";
 
 $telegram = new TelegramNotifier(
-    getenv('TELEGRAM_BOT_TOKEN'),
-    getenv('TELEGRAM_CHAT_ID')
+    env('TELEGRAM_BOT_TOKEN'),
+    env('TELEGRAM_CHAT_ID')
 );
 $telegramSent = $telegram->send($mensaje);
 
 $mailer = new MailNotifier(
-    getenv('GMAIL_USER'),
-    getenv('GMAIL_APP_PASSWORD'),
-    array_filter(explode(',', getenv('GMAIL_TO'))),
-    array_filter(explode(',', getenv('GMAIL_CC') ?: ''))
+    env('GMAIL_USER'),
+    env('GMAIL_APP_PASSWORD'),
+    array_filter(explode(',', env('GMAIL_TO'))),
+    array_filter(explode(',', env('GMAIL_CC') ?: ''))
 );
 $mailSent = $mailer->send(
     "Recordatorio: {$remainingBoils} hervidas pendientes",
