@@ -6,7 +6,10 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Services\WeatherService;
 use App\Services\HydrationCalculator;
+use App\Services\TelegramNotifier;
+
 use App\Repositories\RunLogRepository;
+
 use Dotenv\Dotenv;
 
 // A partir de aquí, common.php ya se cargó vía el autoloader "files",
@@ -51,6 +54,8 @@ if ($logId === null) {
     exit(0);
 }
 
+// ------------------------------------------ Resumen del CronJob
+
 echo "=== Bot Clima — {$today} ===
 Temperatura máxima pronosticada: {$temperature}°C
 Litros por adulto: {$result['liters_per_adult']}L
@@ -58,3 +63,23 @@ Litros bebé: {$result['liters_baby']}L
 Total del día: {$result['total_liters']}L
 Hervidas necesarias: {$result['boils_needed']}
 Log guardado con ID: {$logId}\n";
+
+// ------------------------------------------ Notificaciones
+$telegram = new TelegramNotifier(
+    getenv('TELEGRAM_BOT_TOKEN'),
+    getenv('TELEGRAM_CHAT_ID')
+);
+
+$mensaje = "🌡️ <b>Bot Clima — {$today}</b>\n\n"
+    . "Temperatura máxima: <b>{$temperature}°C</b>\n"
+    . "Litros por adulto: {$result['liters_per_adult']}L\n"
+    . "Litros bebé: {$result['liters_baby']}L\n"
+    . "<b>Total del día: {$result['total_liters']}L</b>\n"
+    . "<b>Hervidas necesarias: {$result['boils_needed']}</b>\n\n"
+    . "Ronda 1: ahora. Quedan " . ($result['boils_needed'] - 1) . " rondas más hoy.";
+
+$telegramSent = $telegram->send($mensaje);
+
+echo $telegramSent
+    ? "Notificación Telegram enviada.\n"
+    : "Notificación Telegram FALLÓ (revisar error_log).\n";
