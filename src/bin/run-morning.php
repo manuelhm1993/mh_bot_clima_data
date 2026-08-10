@@ -55,12 +55,13 @@ if ($logId === null) {
 }
 
 // ------------------------------------------ Resumen del CronJob
+$total_dia = round($result['total_liters'], 2);
 
 echo "=== Bot Clima — {$today} ===
 Temperatura máxima pronosticada: {$temperature}°C
 Litros por adulto: {$result['liters_per_adult']}L
 Litros bebé: {$result['liters_baby']}L
-Total del día: {$result['total_liters']}L
+Total del día: {$total_dia}L
 Hervidas necesarias: {$result['boils_needed']}
 Log guardado con ID: {$logId}\n";
 
