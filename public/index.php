@@ -1,8 +1,8 @@
 <?php
-$host = getenv('DB_HOST') ?: 'mh_clima_db'; // nombre del servicio en compose
-$db   = getenv('DB_NAME') ?: 'mh_clima';
-$user = getenv('DB_USER') ?: 'mh_clima_user';
-$pass = getenv('DB_PASS') ?: '';
+$host = env('DB_HOST') ?: 'mh_clima_db'; // nombre del servicio en compose
+$db   = env('DB_NAME') ?: 'mh_clima';
+$user = env('DB_USER') ?: 'mh_clima_user';
+$pass = env('DB_PASS') ?: '';
 
 try {
     $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";

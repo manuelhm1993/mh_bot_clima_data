@@ -26,8 +26,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      # Conectamos SOLO la carpeta src hacia el directorio público de Apache
-      - ./src:/var/www/html
+      - .:/var/www/app         # Apunta el backend al wd
+      - ./public:/var/www/html # Apunta la carpeta public al html
     depends_on:
       mh_clima_db:
         condition: service_healthy
