@@ -1,0 +1,32 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Bot automatizado que consulta el pronóstico diario de temperatura en Maracaibo, calcula el mínimo de agua a hervir y consumir según el hogar (5 adultos + 1 bebé de 9 meses), y notifica el plan del día por Telegram y Gmail. Corre dos veces al día vía cron: cálculo completo a las 6:00 AM, recordatorio a las 12:00 PM.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuelhm1993/mh_bot_clima_data.git"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "js",
+    "php",
+    "json",
+    "clima",
+    "hidratación"
+  ],
+  "author": "Ing. Manuel Henriquez",
+  "license": "ISC",
+  "homepage": "https://bot-clima.mhenriquez.com",
+  "dependencies": {
+    "chart.js": "^4.5.1"
+  }
+}

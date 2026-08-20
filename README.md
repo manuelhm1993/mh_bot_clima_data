@@ -143,7 +143,8 @@ mh_bot_clima_data/
 │   └── files.md           # Archivos de documentación para el desarrollador
 ├── public/
 │   ├── resources/         # Recursos de media
-│   └── index.php          # Punto de entrada de la app
+│   ├── api.php            # (El Endpoint) Extrae los últimos 7 días en JSON
+│   └── index.php          # (La Vista) Pinta el Dashboard y el gráfico
 └── tests/                 # Scripts de prueba manual, aislados (no suben a producción)
 ```
 
