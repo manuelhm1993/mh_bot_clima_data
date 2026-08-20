@@ -33,17 +33,17 @@ Bot automatizado que consulta el pronóstico diario de temperatura en Maracaibo,
 
 ```
 06:00 (cron 1 — run-morning.php)
-  → Consulta pronóstico de temperatura máxima (Open-Meteo, Maracaibo)
-  → Calcula litros: 2.0L base + 0.08L por cada °C sobre 25°C (calibrado con dato real: 2.4L a 30°C)
-  → Bebé: 245ml fijos (245ml, punto medio recomendación pediátrica 9 meses)
-  → Hervidas necesarias = ceil(total_litros / 5L) — capacidad de la olla
-  → Guarda registro del día en MySQL (protegido contra duplicado con UNIQUE KEY)
-  → Notifica Telegram + Gmail con el plan completo del día
+→ Consulta pronóstico de temperatura máxima (Open-Meteo, Maracaibo)
+→ Calcula litros: 2.0L base + 0.08L por cada °C sobre 25°C (calibrado con dato real: 2.4L a 30°C)
+→ Bebé: 245ml fijos (245ml, punto medio recomendación pediátrica 9 meses)
+→ Hervidas necesarias = ceil(total_litros / 5L) — capacidad de la olla
+→ Guarda registro del día en MySQL (protegido contra duplicado con UNIQUE KEY)
+→ Notifica Telegram + Gmail con el plan completo del día
 
 12:00 (cron 2 — run-noon.php)
-  → NO vuelve a consultar el clima (evita inconsistencia con el cálculo de la mañana)
-  → Lee el registro de hoy ya guardado
-  → Notifica recordatorio de las hervidas restantes
+→ NO vuelve a consultar el clima (evita inconsistencia con el cálculo de la mañana)
+→ Lee el registro de hoy ya guardado
+→ Notifica recordatorio de las hervidas restantes
 ```
 
 ---
@@ -125,17 +125,25 @@ GMAIL_CC=
 ## Estructura del proyecto 📁
 
 ```
-src/
+mh_bot_clima_data/
 ├── app/
-│   ├── Services/          # WeatherService, HydrationCalculator, TelegramNotifier, MailNotifier
+│   ├── helpers/
+│   │   └── common.php     # base_dir(), env()
 │   ├── Repositories/      # RunLogRepository
-│   └── helpers/
-│       └── common.php     # base_dir(), env()
+│   └── Services/          # HydrationCalculator, MailNotifier, TelegramNotifier, WeatherService
 ├── bin/
 │   ├── run-morning.php    # Cron 6:00 AM
 │   └── run-noon.php       # Cron 12:00 PM
 ├── config/
 │   └── database.php       # Factory de conexión PDO
+├── database/
+│   ├── 2026-08-19-....sql # Migraciones para modificar las tablas
+│   └── schema.sql         # Schema de la db
+├── docs/
+│   └── files.md           # Archivos de documentación para el desarrollador
+├── public/
+│   ├── resources/         # Recursos de media
+│   └── index.php          # Punto de entrada de la app
 └── tests/                 # Scripts de prueba manual, aislados (no suben a producción)
 ```
 
