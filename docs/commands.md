@@ -13,4 +13,10 @@ docker compose -f docker-compose-dev.yml exec mh_clima_web php bin/run-morning.p
 
 5. Apagar el contenedor
 docker compose -f docker-compose-dev.yml down
+
+6. Encender el contenedor
+docker compose -f docker-compose-dev.yml up -d
+
+7. Ejecutar el run-morning.php manualmente
+docker compose -f docker-compose-dev.yml exec mh_clima_web php /var/www/app/bin/run-morning.php
 ```

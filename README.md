@@ -2,7 +2,7 @@
 
 Bot automatizado que consulta el pronóstico diario de temperatura en Maracaibo, calcula el mínimo de agua a hervir y consumir según el hogar (5 adultos + 1 bebé de 9 meses), y notifica el plan del día por Telegram y Gmail. Corre dos veces al día vía cron: cálculo completo a las 6:00 AM, recordatorio a las 12:00 PM.
 
-🌐 [curso.mhenriquez.com](https://curso.mhenriquez.com) · 📦 Release v1.0.0
+🌐 [bot-clima.mhenriquez.com](https://bot-clima.mhenriquez.com) · 📦 Release v1.0.0
 
 ---
 
