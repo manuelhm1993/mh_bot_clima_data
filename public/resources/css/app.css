@@ -1,0 +1,130 @@
+:root {
+    --bg-dark: #111827;
+    --bg-card: #1f2937;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --accent-blue: #60a5fa;
+    --border-color: #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, sans-serif;
+    padding: 2rem;
+}
+
+/* Aquí aplicamos tu aprendizaje de Flexbox */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Separación perfecta entre header, gráfico y tabla */
+}
+
+header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+h1 {
+    color: var(--accent-blue);
+    font-size: 2rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Flexbox para alinear la tabla en dispositivos móviles */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: #374151;
+    color: var(--text-main);
+}
+
+.badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.badge-ok { background-color: #064e3b; color: #86efac; }
+.badge-fail { background-color: #7f1d1d; color: #fca5a5; }
+
+/* =========================================
+   RESPONSIVE DESIGN (Media Queries)
+   ========================================= */
+
+/* Tablets y teléfonos grandes (hasta 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem; /* Reducimos el espacio muerto de los bordes a la mitad */
+    }
+
+    .container {
+        gap: 1.5rem; /* Acercamos las tarjetas */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Tipografía más compacta */
+    }
+
+    .card {
+        padding: 1rem; /* Liberamos espacio interno para el gráfico y la tabla */
+    }
+}
+
+/* Teléfonos estándar y pequeños (hasta 480px) */
+@media (max-width: 480px) {
+    body {
+        padding: 0.5rem; /* Máximo aprovechamiento de pantalla */
+    }
+
+    .container {
+        gap: 1rem;
+    }
+
+    /* Táctica para Tablas: Achicamos la letra y reducimos el relleno de las celdas */
+    table {
+        font-size: 0.80rem; 
+    }
+
+    th, td {
+        padding: 0.6rem 0.4rem;
+    }
+}
+
+/* Garantía de Scroll Horizontal para la tabla */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Deslizamiento suave en iOS */
+}

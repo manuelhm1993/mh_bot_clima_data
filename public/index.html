@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH Clima | Panel de Hidratación</title>
+
+    <!-- CSS -->
+    <link rel="shortcut icon" href="./resources/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./resources/css/app.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MH Bot Clima Maracaibo">
+    <meta property="og:description" content="Dashboard del bot que grafica los cambios de temperatura y consumo de agua semanalmente.">
+    <meta property="og:image" content="https://bot-clima.mhenriquez.com/resources/logo-mh-clima.jpeg">
+    <meta property="og:url" content="https://bot-clima.mhenriquez.com">
+    <meta property="og:type" content="website">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Bot Clima Maracaibo</h1>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Métricas de Hidratación — Últimos 7 Días</p>
+        </header>
+
+        <main style="display: flex; flex-direction: column; gap: 2rem;">
+            
+            <section class="card">
+                <canvas id="hydrationChart" height="100"></canvas>
+            </section>
+
+            <section class="card table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Temperatura</th>
+                            <th>Total Litros</th>
+                            <th>Hervidas</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="./resources/js/lib/chart.umd.js"></script>
+    <script src="./resources/js/app.js"></script>
+</body>
+</html>
